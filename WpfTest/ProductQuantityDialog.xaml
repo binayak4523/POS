@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfTest.ProductQuantityDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTest"
+        mc:Ignorable="d"
+        Title="Enter Quantity and Price"
+        Height="200"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#262626">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Quantity:" Foreground="White" FontSize="16" VerticalAlignment="Center" Grid.Row="0"/>
+        <TextBox x:Name="QuantityTextBox" FontSize="16" Grid.Row="0" Margin="100,0,0,10" Text="1"/>
+
+        <TextBlock Text="Price:" Foreground="White" FontSize="16" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBox x:Name="PriceTextBox" FontSize="16" Grid.Row="1" Margin="100,0,0,10" />
+
+        <Button Content="OK" Width="100" Height="30" Grid.Row="2" HorizontalAlignment="Center" Click="OkButton_Click"/>
+    </Grid>
+</Window>

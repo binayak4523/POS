@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WpfTest.CustomerList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfTest"
+             mc:Ignorable="d">
+    <Grid>
+        <!-- Main Grid that fills the entire UserControl -->
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Text="Customer List" FontSize="24" Foreground="#FFFFFF" Grid.Row="0" Margin="10,0,0,10" />
+
+            <!-- Product List -->
+            <ListView Grid.Row="1" Background="#262626" Foreground="#FFFFFF" Margin="10,0,10,95" ItemsSource="{Binding Customers}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Customer ID" DisplayMemberBinding="{Binding CustomerID}" Width="100" />
+                        <GridViewColumn Header="Customer Name" DisplayMemberBinding="{Binding Name}" Width="150" />
+                        <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}" Width="150" />
+                        <GridViewColumn Header="Mobile No" DisplayMemberBinding="{Binding MobileNo}" Width="150" />
+                        <GridViewColumn Header="Customer Type" DisplayMemberBinding="{Binding CustomerType}" Width="100" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!-- Bottom Buttons -->
+        </Grid>
+        <Grid Grid.Row="2" Background="#262626" Margin="10,0,10,0" Height="74" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,10,10">
+                <Button Content="New Customer" Style="{StaticResource UserBottomButtonStyle}" Width="136" Click="AddCustomerButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

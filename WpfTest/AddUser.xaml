@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfTest.AddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTest"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="AddUser" Height="575" Width="638" WindowStartupLocation="CenterScreen" Background="#2B1B1E" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="473.28"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Content -->
+        <StackPanel Grid.Row="0" Margin="10,10,10,10">
+            <TextBlock Text="User Name" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="UserTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Staff Name" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="StaffTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Address" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="AddressTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Role" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <ComboBox x:Name="RoleComboBox" FontSize="18" Margin="0,0,0,10" Background="LightPink"
+                  ItemsSource="{Binding Roles}" 
+                  DisplayMemberPath="RoleName" 
+                  SelectedValuePath="RoleName" />
+
+            <TextBlock Text="Salary" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="SalaryTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Password" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="PasswordTextBox" FontSize="18" Margin="0,0,0,10"/>
+            <!-- Additional Fields as needed -->
+        </StackPanel>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0" Width="200">
+            <Button Content="Save" FontSize="18" Width="80" Margin="10,0" Background="#333333" Foreground="#00FFCC" Height="45"/>
+            <Button Content="Cancel" FontSize="18" Width="80" Margin="10,0" Click="CancelButton_Click" Background="#333333" Foreground="#00FFCC" Height="45"/>
+        </StackPanel>
+    </Grid>
+</Window>

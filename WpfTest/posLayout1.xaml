@@ -1,0 +1,159 @@
+﻿<Page x:Class="WpfTest.posLayout1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfTest.Models"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="posLayout1">
+
+
+    <Grid x:Name="MainGrid">
+        <!-- Header Section -->
+        <Grid Background="Transparent" Height="70" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="User : Owner" FontSize="24" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding CurrentDateTime}" FontSize="18" Foreground="#CCCCCC" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" />
+        </Grid>
+
+        <!-- Sidebar Section -->
+        <StackPanel HorizontalAlignment="Left" Width="200" Background="Transparent" Margin="0,70,0,65">
+            <!-- 'All' Button -->
+            <Button Content="All" Height="60" Background="#333333" Foreground="#00FFCC" FontSize="18" Margin="0,20,0,0"
+            Command="{Binding FilterByCategoryCommand}" CommandParameter="All"
+            IsEnabled="{Binding SelectedCategory, ConverterParameter=All}" />
+
+            <!-- Category Buttons -->
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}" Height="60" Background="#333333" Foreground="#00FFCC" FontSize="18" Margin="0,10,0,0"
+                        Command="{Binding DataContext.FilterByCategoryCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                        CommandParameter="{Binding Name}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+
+        <!-- Product Display Section -->
+        <Grid Margin="210,80,20,85">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Select a Product" FontSize="24" Foreground="#FFFFFF" Grid.Row="0" Margin="10,0,0,10"/>
+
+            <WrapPanel Grid.Row="1" Background="Transparent" VerticalAlignment="Top" Margin="0,0,383,0">
+                <ItemsControl Name="ProductsList" ItemsSource="{Binding Products}" Background="#1A1A1A" VerticalAlignment="Top" Margin="10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="180" Height="240" Margin="10" Background="#262626" CornerRadius="10" MouseLeftButtonDown="Product_MouseLeftButtonDown">
+                                <StackPanel>
+                                    <Image Source="{Binding ProductImg}" Width="160" Height="160" Stretch="UniformToFill" Margin="10"/>
+                                    <TextBlock Text="{Binding Name}" FontSize="18" Foreground="#00FFCC" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Price, StringFormat=C}" FontSize="16" Foreground="#CCCCCC" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+        </Grid>
+
+        <!-- Order Summary and Keypad Section -->
+        <Grid HorizontalAlignment="Right" Width="382" Margin="0,80,20,85">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListView Name="OrderList" Grid.Row="0" Background="#262626" Foreground="#FFFFFF" Margin="0,0,0,229">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Designation" Width="200" DisplayMemberBinding="{Binding Designation}"/>
+                        <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding Price, StringFormat=C}"/>
+                        <GridViewColumn Header="Qtd." Width="50" DisplayMemberBinding="{Binding Quantity}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Grid Background="#444444" Margin="0,691,0,169">
+                <TextBlock Text="Ticket total" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Text="0.00 USD" FontSize="16" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+            </Grid>
+
+            <!-- Updated Button Section -->
+            <Grid Background="#444444" Margin="0,851,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Content="Checkout" Style="{StaticResource RoundedButtonStyle}" Background="#39bb32" FontSize="14" Foreground="Black" Click="CheckoutButton_Click" />
+                <Button Grid.Row="0" Grid.Column="1" Content="Cancle" Style="{StaticResource RoundedButtonStyle}" Background="#CCCCCC" FontSize="14" Foreground="Black" />
+            </Grid>
+        </Grid>
+
+        <!-- Bottom Menu Bar -->
+        <Grid Background="Transparent" VerticalAlignment="Bottom" Height="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0">
+                <Button Style="{StaticResource BottomMenuButtonStyle}" Click="CloseButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8BB;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="Close" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BottomMenuButtonStyle}" Click="BackofficeButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE713;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="BackOffice" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BottomMenuButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8FB;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="LogOut" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BottomMenuButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="User" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BottomMenuButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE715;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="Session" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BottomMenuButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE9D2;" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="Reports" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

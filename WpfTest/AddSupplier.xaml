@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfTest.AddSupplier"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTest"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="AddSupplier" Height="654" Width="800" WindowStartupLocation="CenterScreen" Background="#2B1B1E">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="473.28"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Content -->
+        <StackPanel Grid.Row="0" Margin="10,10,10,10">
+            <TextBlock Text="Suppliers Name" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="SuppliersTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Contact Name" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="ContactTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Address" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="AddressTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="City" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="CityTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Postal Code" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="PostalTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Country" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="CountryTextBox" FontSize="18" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Phone No" FontSize="18" Margin="0,10,0,5" Foreground="#FFFFFF"/>
+            <TextBox x:Name="PhoneTextBox" FontSize="18" Margin="0,0,0,10"/>
+            <!-- Additional Fields as needed -->
+        </StackPanel>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0" Width="200">
+            <Button Content="Save" FontSize="18" Width="80" Margin="10,0" Background="#333333" Foreground="#00FFCC" Height="45" Click="SaveButton_Click"/>
+            <Button Content="Cancel" FontSize="18" Width="80" Margin="10,0" Click="CancelButton_Click" Background="#333333" Foreground="#00FFCC" Height="45"/>
+        </StackPanel>
+    </Grid>
+</Window>
